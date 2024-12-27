@@ -10,7 +10,7 @@ const betSchema = new mongoose.Schema({
     required: true,
   },
   matkaBetNumber: {
-    type: String,
+    type: Number,
     required: true,
   },
   user: {
