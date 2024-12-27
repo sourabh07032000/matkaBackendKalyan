@@ -16,11 +16,15 @@ app.use(express.json());
 // Routes
 const userRoutes = require('./routes/user'); // Adjust the path as needed
 const newOtpRoutes = require('./routes/otpRoutes');
+const marketDataRoute = require('./routes/marketData');
+
 // const otpRoutes = require('./routes/otp');
 
 // Use signup and OTP routes
 app.use('/user', userRoutes);
 app.use('/newOtp', newOtpRoutes)
+app.use('/api/market-data', marketDataRoute);
+
 // app.use('/api', otpRoutes);
 // app.use('/cashfree', cashfreeRoutes); // Cashfree routes ko `/cashfree` prefix ke saath mount kar rahe hain
 
