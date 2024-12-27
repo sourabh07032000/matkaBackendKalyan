@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const betSchema = new mongoose.Schema({
   betAmount: {
-    type: Number,
+    type: String,
     required: true,
   },
   matkaBetType: {
