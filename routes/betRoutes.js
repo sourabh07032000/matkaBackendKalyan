@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
   const { betAmount, matkaBetType, matkaBetNumber, user, market_id, betTime } = req.body;
 
   if (!betAmount || !matkaBetType || !matkaBetNumber || !user || !market_id || !betTime) {
-    return res.status(400).json({ error: 'All fields are required.' });
+    return res.status(400).json({ error: betAmount });
   }
 
   try {
