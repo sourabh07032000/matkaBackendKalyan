@@ -16,6 +16,7 @@ app.use(express.json());
 // Routes
 const userRoutes = require('./routes/user'); // Adjust the path as needed
 const newOtpRoutes = require('./routes/otpRoutes');
+const betRoutes = require('./routes/betRoutes');
 const marketDataRoute = require('./routes/marketData');
 
 // const otpRoutes = require('./routes/otp');
@@ -23,6 +24,7 @@ const marketDataRoute = require('./routes/marketData');
 // Use signup and OTP routes
 app.use('/user', userRoutes);
 app.use('/newOtp', newOtpRoutes)
+app.use('/bet', betRoutes)
 app.use('/api/market-data', marketDataRoute);
 
 // app.use('/api', otpRoutes);
