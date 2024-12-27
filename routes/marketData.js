@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
         let data = new FormData();
         data.append('username', '8889223659');
         data.append('API_token', 'NY3ni3VQS82tEmdp');
-        data.append('market_name', ''); // Corrected field spelling
+        data.append('markte_name', ''); // Corrected field spelling
         data.append('date', '2024-12-27');
 
         // Axios configuration
