@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true},
   mPin: { type: String, required: true },
   transactionRequest : Array,
+  betDetails : Array,
   wallet: {type: Number, default: 200}
 }, {
   timestamps: true
