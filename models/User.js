@@ -6,7 +6,8 @@ const UserSchema = new mongoose.Schema({
   mobileNumber: { type: String, required: true, unique: true },
   password: { type: String, required: true},
   mPin: { type: String, required: true },
-  transactionRequest : Array
+  transactionRequest : Array,
+  wallet: {type: Number, default: 200}
 }, {
   timestamps: true
 });
