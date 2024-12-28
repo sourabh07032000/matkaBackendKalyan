@@ -73,12 +73,12 @@ router.delete('/:id', async (req, res) => {
 
 // PUT: Update user information
 router.put('/:id', async (req, res) => {
-  const { username, mobileNumber, password, mPin } = req.body;
+  const { username, mobileNumber, password, mPin, wallet, transactionRequest } = req.body;
   try {
     // Find user by ID and update details
     const user = await User.findByIdAndUpdate(
       req.params.id,
-      { username, mobileNumber, password, mPin },
+      { username, mobileNumber, password, mPin, wallet, transactionRequest },
       { new: true, runValidators: true }
     );
     
