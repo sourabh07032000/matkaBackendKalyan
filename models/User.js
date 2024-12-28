@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
   mPin: { type: String, required: true },
   transactionRequest : Array,
   betDetails : Array,
+  withdrawalRequest : Array,
   wallet: {type: Number, default: 200}
 }, {
   timestamps: true
