@@ -73,12 +73,12 @@ router.delete('/:id', async (req, res) => {
 
 // PUT: Update user information
 router.put('/:id', async (req, res) => {
-  const { username, mobileNumber, password, mPin, wallet, transactionRequest } = req.body;
+  const { username, mobileNumber, password, mPin, wallet, transactionRequest, betDetails } = req.body;
   try {
     // Find user by ID and update details
     const user = await User.findByIdAndUpdate(
       req.params.id,
-      { username, mobileNumber, password, mPin, wallet, transactionRequest },
+      { username, mobileNumber, password, mPin, wallet, transactionRequest, betDetails },
       { new: true, runValidators: true }
     );
     
@@ -118,5 +118,29 @@ router.put('/:id/transactionRequest', async (req, res) => {
   }
 });
 
+// PUT: Update user's bet details array
+router.put('/:id/betDetails', async (req, res) => {
+  const { betDetails } = req.body;
+
+  if (!Array.isArray(betDetails)) {
+    return res.status(400).json({ message: 'betDetails must be an array' });
+  }
+
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update the betDetails array (replace or merge, depending on requirements)
+    user.betDetails = betDetails;
+    await user.save();
+
+    res.status(200).json({ message: 'Transaction requests updated successfully', user });
+  } catch (error) {
+    console.error('Error updating transaction requests:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 module.exports = router;
