@@ -18,6 +18,7 @@ const userRoutes = require('./routes/user'); // Adjust the path as needed
 const newOtpRoutes = require('./routes/otpRoutes');
 const betRoutes = require('./routes/betRoutes');
 const marketDataRoute = require('./routes/marketData');
+const resultRoutes = require('./routes/resultUpdate')
 
 // const otpRoutes = require('./routes/otp');
 
@@ -25,6 +26,7 @@ const marketDataRoute = require('./routes/marketData');
 app.use('/user', userRoutes);
 app.use('/newOtp', newOtpRoutes)
 app.use('/bet', betRoutes)
+app.use('/resultUpdate', resultRoutes)
 app.use('/api/market-data', marketDataRoute);
 
 // app.use('/api', otpRoutes);
