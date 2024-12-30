@@ -14,8 +14,7 @@ const betSchema = new mongoose.Schema({
     required: true,
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId, // Reference to a User model
-    ref: 'User',
+    type: String, 
     required: true,
   },
   betPlacedTiming: {
