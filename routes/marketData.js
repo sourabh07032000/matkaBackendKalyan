@@ -66,5 +66,39 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+// Update new_result or old_result
+router.put("/api/market-data/:id", async (req, res) => {
+  const { id } = req.params;
+  const { newResult, oldResult } = req.body;
+
+  // Prepare the fields to update
+  const updateFields = {};
+  if (newResult) updateFields.new_result = newResult;
+  if (oldResult) updateFields.old_result = oldResult;
+
+  try {
+    if (Object.keys(updateFields).length === 0) {
+      return res.status(400).json({ message: "No data provided to update" });
+    }
+
+    const updatedMarket = await Market.findByIdAndUpdate(
+      id,
+      updateFields,
+      { new: true }
+    );
+
+    if (!updatedMarket) {
+      return res.status(404).json({ message: "Market not found" });
+    }
+
+    res.status(200).json({
+      message: "Market data updated successfully",
+      data: updatedMarket,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
 
 module.exports = router;
