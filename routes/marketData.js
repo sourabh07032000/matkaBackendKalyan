@@ -70,7 +70,8 @@ router.delete('/:id', async (req, res) => {
 router.put("/api/market-data/:id", async (req, res) => {
   const { id } = req.params;
   const { new_result, old_result } = req.body;
-
+  console.log(new_result)
+  console.log("OK")
   // Prepare the fields to update
   const updateFields = {};
   if (new_result) updateFields.new_result = new_result;
