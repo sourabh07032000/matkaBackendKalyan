@@ -166,5 +166,59 @@ router.put('/:id/betDetails', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+// Add this new route for checking UTR existence
+router.get('/check-utr/:utrNumber', async (req, res) => {
+  try {
+    const { utrNumber } = req.params;
+    
+    // Find any user with this UTR number in their transaction requests
+    const userWithUTR = await User.findOne({
+      'transactionRequest.utrNumber': utrNumber
+    });
+
+    res.json({ exists: !!userWithUTR });
+  } catch (error) {
+    console.error('Error checking UTR:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Update your existing transaction request route
+router.put('/:id/transactionRequest', async (req, res) => {
+  const { transactionRequest } = req.body;
+
+  if (!Array.isArray(transactionRequest)) {
+    return res.status(400).json({ message: 'transactionRequest must be an array' });
+  }
+
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Check if the new transaction has a UTR number
+    const newTransaction = transactionRequest[transactionRequest.length - 1];
+    if (newTransaction && newTransaction.utrNumber) {
+      // Check if UTR already exists in any user's transactions
+      const existingUTR = await User.findOne({
+        'transactionRequest.utrNumber': newTransaction.utrNumber
+      });
+
+      if (existingUTR) {
+        return res.status(400).json({ message: 'UTR number already exists' });
+      }
+    }
+
+    // Update the transactionRequest array
+    user.transactionRequest = transactionRequest;
+    await user.save();
+
+    res.status(200).json({ message: 'Transaction requests updated successfully', user });
+  } catch (error) {
+    console.error('Error updating transaction requests:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 module.exports = router;
