@@ -72,24 +72,123 @@ router.delete('/:id', async (req, res) => {
 });
 
 // PUT: Update user information
+// Update the main PUT route to handle bankDetails properly
 router.put('/:id', async (req, res) => {
-  const { username, mobileNumber, password, mPin, wallet, transactionRequest, betDetails, withdrawalRequest } = req.body;
   try {
-    // Find user by ID and update details
-    const user = await User.findByIdAndUpdate(
+    console.log('Update request body:', req.body); // Debug log
+
+    // If updating bank details
+    if (req.body.bankDetails) {
+      const updatedUser = await User.findByIdAndUpdate(
+        req.params.id,
+        { 
+          $set: { 
+            bankDetails: {
+              ...req.body.bankDetails,
+              submittedAt: new Date()
+            }
+          } 
+        },
+        { new: true }
+      );
+      
+      if (!updatedUser) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      
+      console.log('Updated user with bank details:', updatedUser); // Debug log
+      return res.json(updatedUser);
+    }
+
+    // For other updates
+    const { username, mobileNumber, password, mPin, wallet, transactionRequest, betDetails, withdrawalRequest } = req.body;
+    
+    const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       { username, mobileNumber, password, mPin, wallet, transactionRequest, betDetails, withdrawalRequest },
       { new: true, runValidators: true }
     );
     
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'User updated successfully', user: updatedUser });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Add a specific route for bank details approval
+router.put('/:id/bankDetails/approve', async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          'bankDetails.isApproved': true,
+          'bankDetails.approvedAt': new Date()
+        }
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.error('Error approving bank details:', error);
+    res.status(500).json({ message: 'Error approving bank details' });
+  }
+});
+
+// Add a specific route for bank details rejection
+router.put('/:id/bankDetails/reject', async (req, res) => {
+  try {
+    const { reason } = req.body;
+    
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          'bankDetails.isApproved': false,
+          'bankDetails.rejectedAt': new Date(),
+          'bankDetails.rejectionReason': reason
+        }
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(updatedUser);
+  } catch (error) {
+    console.error('Error rejecting bank details:', error);
+    res.status(500).json({ message: 'Error rejecting bank details' });
+  }
+});
+
+// Add a route to check bank details status
+router.get('/:id/bankDetails/status', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    res.status(200).json({ message: 'User updated successfully', user });
+    res.json({
+      hasDetails: !!user.bankDetails,
+      isApproved: user.bankDetails?.isApproved || false,
+      details: user.bankDetails || null
+    });
   } catch (error) {
-    console.error('Error updating user:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error checking bank details status:', error);
+    res.status(500).json({ message: 'Error checking bank details status' });
   }
 });
 
