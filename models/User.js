@@ -8,6 +8,15 @@ const UserSchema = new mongoose.Schema({
   mPin: { type: String, required: true },
   transactionRequest : Array,
   betDetails : Array,
+  bankDetails: {
+    accountNumber: String,
+    ifscCode: String,
+    accountHolderName: String,
+    upiId: String,
+    isApproved: {
+      type: Boolean,
+      default: false
+    },
   withdrawalRequest : Array,
   wallet: {type: Number, default: 200}
 }, {
