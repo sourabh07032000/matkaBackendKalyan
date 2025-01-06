@@ -182,7 +182,20 @@ router.get('/check-utr/:utrNumber', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
+// routes/user.js
+router.put('/:id/bankDetails', async (req, res) => {
+  try {
+    const { bankDetails } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: { bankDetails } },
+      { new: true }
+    );
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating bank details' });
+  }
+});
 // Update your existing transaction request route
 router.put('/:id/transactionRequest', async (req, res) => {
   const { transactionRequest } = req.body;
