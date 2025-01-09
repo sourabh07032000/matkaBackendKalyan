@@ -1,7 +1,7 @@
 // routes/paymentDetails.js
 const express = require('express');
 const router = express.Router();
-const PaymentDetails = require('../models/paymentDetails');
+const PaymentDetails = require('../models/PaymentDetails');
 
 // Get active payment details
 router.get('/payment-details', async (req, res) => {
