@@ -1,14 +1,10 @@
 // models/paymentDetails.js
 const mongoose = require('mongoose');
 
-const paymentDetailsSchema = new mongoose.Schema({
+const PaymentDetailsSchema = new mongoose.Schema({
   qrImage: String,
   upiId: String,
-  phoneNumbers: {
-    phonepe: String,
-    googlePay: String,
-    paytm: String
-  },
+ paymentPhoneNumber: String,
   bankDetails: {
     accountNumber: String,
     ifscCode: String,
@@ -32,4 +28,4 @@ const paymentDetailsSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('PaymentDetails', paymentDetailsSchema);
+module.exports = mongoose.model('PaymentDetails', PaymentDetailsSchema);
