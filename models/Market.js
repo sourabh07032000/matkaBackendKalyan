@@ -13,7 +13,9 @@ const MarketSchema = new mongoose.Schema({
       aankdo_close : String,
       figure_open : String,
       figure_close : String,
-      jodi: String
+      jodi: String,
+      aankdo_open_close_time: String,
+  aankdo_close_close_time: String
 
 }, {
   timestamps: true
