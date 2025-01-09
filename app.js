@@ -29,7 +29,8 @@ app.use('/newOtp', newOtpRoutes)
 app.use('/bet', betRoutes)
 app.use('/resultUpdate', resultRoutes)
 app.use('/api/market-data', marketDataRoute);
-app.use('/api/paymentDetails', paymentDetailsRoutes);
+app.use('/api', paymentDetailsRoutes);
+
 
 // app.use('/api', otpRoutes);
 // app.use('/cashfree', cashfreeRoutes); // Cashfree routes ko `/cashfree` prefix ke saath mount kar rahe hain
