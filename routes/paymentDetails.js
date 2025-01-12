@@ -43,28 +43,18 @@ router.post('/payment-details', async (req, res) => {
 
 // Update payment details
 router.put('/payment-details/:id', async (req, res) => {
-  try {
-    const updatedDetails = await PaymentDetails.findByIdAndUpdate(
+   try {
+    const updatedPaymentDetails = await PaymentDetails.findByIdAndUpdate(
       req.params.id,
-      {
-        $set: {
-          qrImage: req.body.qrImage,
-          upiId: req.body.upiId,
-          paymentPhoneNumber: req.body.paymentPhoneNumber,
-          bankDetails: {
-            accountNumber: req.body.bankDetails.accountNumber,
-            ifscCode: req.body.bankDetails.ifscCode,
-            accountHolderName: req.body.bankDetails.accountHolderName,
-            bankName: req.body.bankDetails.bankName
-          },
-          updatedAt: Date.now()
-        }
-      },
-      { new: true }
+      req.body,
+      { new: true, runValidators: true }
     );
-    res.json(updatedDetails);
+    if (!updatedPaymentDetails) {
+      return res.status(404).json({ message: 'Market not found' });
+    }
+    res.status(200).json(updatedPaymentDetails);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ message: error.message });
   }
 });
 
