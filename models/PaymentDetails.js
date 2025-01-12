@@ -18,6 +18,13 @@ const PaymentDetailsSchema = new mongoose.Schema({
       default: true
     }
   },
+  contactEnquiry: {
+    message: String,
+    isActive: {
+      type: Boolean,
+      default: true
+    }
+  },
   isActive: {
     type: Boolean,
     default: true
