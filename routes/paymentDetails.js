@@ -31,6 +31,10 @@ router.post('/payment-details', async (req, res) => {
         message: req.body.announcement.message,
         isActive: req.body.announcement.isActive
       },
+      contactEnquiry: {
+        message: req.body.contactEnquiry.message,
+        isActive: req.body.contactEnquiry.isActive
+      },
       isActive: true
     });
     
