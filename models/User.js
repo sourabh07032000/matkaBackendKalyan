@@ -27,6 +27,7 @@ const UserSchema = new mongoose.Schema({
     ifscCode: String,
     accountHolderName: String,
     upiId: String,
+    upiphoneNumber:String,
     isApproved: {
       type: Boolean,
       default: false
