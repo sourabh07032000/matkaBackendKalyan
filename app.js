@@ -20,6 +20,9 @@ const betRoutes = require('./routes/betRoutes');
 const marketDataRoute = require('./routes/marketData');
 const resultRoutes = require('./routes/resultUpdate')
 const paymentDetailsRoutes = require('./routes/paymentDetails')
+const notificationRoutes = require('./routes/notificationRoutes');
+
+
 
 // const otpRoutes = require('./routes/otp');
 
@@ -30,6 +33,7 @@ app.use('/bet', betRoutes)
 app.use('/resultUpdate', resultRoutes)
 app.use('/api/market-data', marketDataRoute);
 app.use('/api', paymentDetailsRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 
 // app.use('/api', otpRoutes);
