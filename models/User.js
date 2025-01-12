@@ -29,8 +29,8 @@ const UserSchema = new mongoose.Schema({
     upiId: String,
     upiphoneNumber:String,
     isApproved: {
-      type: Boolean,
-      default: false
+      type: String,
+      default: "false"
     }
   }, // Added missing closing brace here
   withdrawalRequest: Array,
