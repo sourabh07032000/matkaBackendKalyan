@@ -33,6 +33,8 @@ app.use('/bet', betRoutes)
 app.use('/resultUpdate', resultRoutes)
 app.use('/api/market-data', marketDataRoute);
 app.use('/api', paymentDetailsRoutes);
+app.use('/api/marketHistory', require('./routes/marketHistory'));
+
 
 
 
