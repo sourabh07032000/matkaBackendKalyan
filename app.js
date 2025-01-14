@@ -71,7 +71,7 @@ app.use((err, req, res, next) => {
 
 // Define the port
 const PORT = process.env.PORT || 5002;
-
+console.log('Credential Path:', process.env.GOOGLE_APPLICATION_CREDENTIALS);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
