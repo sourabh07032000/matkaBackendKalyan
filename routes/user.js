@@ -101,7 +101,7 @@ router.put('/:id', async (req, res) => {
     }
 
     // For other updates
-    const { username, mobileNumber, password, mPin, wallet, transactionRequest, betDetails, withdrawalRequest } = req.body;
+    const { username, mobileNumber, password, mPin, wallet, transactionRequest, betDetails, withdrawalRequest, isDeposit, isWithdrawal } = req.body;
     
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
