@@ -19,6 +19,8 @@ const marketDataRoutes = require('./routes/marketData');
 const resultRoutes = require('./routes/resultUpdate');
 const paymentDetailsRoutes = require('./routes/paymentDetails');
 const marketHistoryRoutes = require('./routes/marketHistory');
+const notificationRoutes = require('./routes/notificationRoutes'); // New notification route
+
 
 // Notification Service (Firebase Admin Initialization)
 const admin = require('firebase-admin');
@@ -39,6 +41,8 @@ app.use('/resultUpdate', resultRoutes);
 app.use('/api/market-data', marketDataRoutes);
 app.use('/api/', paymentDetailsRoutes);
 app.use('/api/marketHistory', marketHistoryRoutes);
+app.use('/notifications', notificationRoutes); // Add the notification route
+
 
 // Connect to MongoDB
 mongoose
