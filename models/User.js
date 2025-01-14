@@ -21,6 +21,14 @@ const UserSchema = new mongoose.Schema({
     required: true 
   },
   transactionRequest: Array,
+  isDeposit: {
+    type: Boolean,
+    default: true
+  },
+  isWithdrawal: {
+    type: Boolean,
+    default: true
+  },
   betDetails: Array,
   bankDetails: {
     accountNumber: String,
