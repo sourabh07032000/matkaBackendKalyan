@@ -23,11 +23,10 @@ const notificationRoutes = require('./routes/notificationRoutes'); // New notifi
 
 
 // Notification Service (Firebase Admin Initialization)
-const admin = require('firebase-admin');
-const serviceAccount = require('./serviceAccountKey.json'); // Replace with your Firebase service account key path
+const admin = require('firebase-admin'); // Replace with your Firebase service account key path
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.applicationDefault(),
 });
 
 // Add Firebase Admin to app locals for shared use across routes
