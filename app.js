@@ -37,7 +37,7 @@ app.use('/newOtp', otpRoutes);
 app.use('/bet', betRoutes);
 app.use('/resultUpdate', resultRoutes);
 app.use('/api/market-data', marketDataRoutes);
-app.use('/api/paymentDetails', paymentDetailsRoutes);
+app.use('/api/', paymentDetailsRoutes);
 app.use('/api/marketHistory', marketHistoryRoutes);
 
 // Connect to MongoDB
