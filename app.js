@@ -27,6 +27,8 @@ const admin = require('firebase-admin'); // Replace with your Firebase service a
 
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
+  projectId: 'matka-app-b73f1', // Add your project ID here
+
 });
 
 // Add Firebase Admin to app locals for shared use across routes
