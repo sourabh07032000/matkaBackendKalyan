@@ -44,7 +44,7 @@ const UserSchema = new mongoose.Schema({
   withdrawalRequest: Array,
   wallet: {
     type: Number, 
-    default: 200
+    default: 10
   }
 }, {
   timestamps: true
