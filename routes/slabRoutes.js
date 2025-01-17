@@ -51,6 +51,19 @@ router.get('/', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedSlab = await SlabRate.findByIdAndDelete(id);
+    if (!deletedSlab) {
+      return res.status(404).json({ success: false, message: 'Slab rate not found' });
+    }
+    res.status(200).json({ success: true, message: 'Slab rate deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting slab rate:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
 
 
 
