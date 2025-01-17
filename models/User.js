@@ -46,9 +46,9 @@ const UserSchema = new mongoose.Schema({
     type: Number, 
     default: 10
   },
-  assignedSlab: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'SlabRate' // Reference to the SlabRate model
+ assignedSlabDetails: { 
+    type: Array, 
+    default: [] 
   }
 }, {
   timestamps: true
