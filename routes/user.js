@@ -335,30 +335,7 @@ router.put('/:id/transactionRequest', async (req, res) => {
   }
 });
 // Assign a slab to a user
-router.post('/:userId/assign-slab', async (req, res) => {
-  try {
-    const { userId } = req.params;
-    const { slabId } = req.body;
-
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found' });
-    }
-
-    const slab = await SlabRate.findById(slabId);
-    if (!slab) {
-      return res.status(400).json({ success: false, message: 'Invalid slab ID' });
-    }
-
-    user.assignedSlab = slabId;
-    await user.save();
-
-    res.status(200).json({ success: true, message: 'Slab assigned successfully' });
-  } catch (error) {
-    console.error('Error assigning slab to user:', error);
-    res.status(500).json({ success: false, message: 'Internal server error' });
-  }
-});
+// Assign a slab to a user
 router.put('/:userId/assign-slab', async (req, res) => {
   const { slabId } = req.body;
   const { userId } = req.params;
@@ -371,23 +348,29 @@ router.put('/:userId/assign-slab', async (req, res) => {
     }
 
     // Update the user with the full slab object in `assignedSlabDetails`
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { assignedSlabDetails: [slab] },
-      { new: true } // Return the updated user
-    );
-
+    const updatedUser = await User.findById(userId);
     if (!updatedUser) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
 
-    res.status(200).json({ success: true, message: 'Slab assigned successfully', user: updatedUser });
+    // Update user details
+    updatedUser.assignedSlabDetails = [slab];
+    await updatedUser.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Slab assigned successfully',
+      user: updatedUser,
+    });
   } catch (error) {
     console.error('Error assigning slab:', error);
-    res.status(500).json({ success: false, message: 'Internal server error' });
+    res.status(500).json({
+      success: false,
+      message: 'Internal server error',
+      error: error.message,
+    });
   }
 });
-
 
 
 
