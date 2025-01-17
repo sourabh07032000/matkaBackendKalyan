@@ -358,6 +358,25 @@ router.post('/:userId/assign-slab', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+router.put('/:id/assign-slab', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { slabId } = req.body;
+
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    user.assignedSlab = slabId;
+    await user.save();
+
+    res.status(200).json({ success: true, message: 'Slab assigned successfully' });
+  } catch (error) {
+    console.error('Error assigning slab:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
 
 
 module.exports = router;
