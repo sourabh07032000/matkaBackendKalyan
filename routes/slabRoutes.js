@@ -41,6 +41,17 @@ router.get('/:userId/slab', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+// Get all slabs
+router.get('/', async (req, res) => {
+  try {
+    const slabs = await SlabRate.find(); // Fetch all slabs from the database
+    res.status(200).json({ success: true, slabs });
+  } catch (error) {
+    console.error('Error fetching slabs:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
 
 
 
