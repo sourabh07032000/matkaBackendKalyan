@@ -360,20 +360,32 @@ router.post('/:userId/assign-slab', async (req, res) => {
 });
 router.put('/:id/assign-slab', async (req, res) => {
   try {
-    const { id } = req.params;
-    const { slabId } = req.body;
+    const { id } = req.params; // User ID
+    const { slabId } = req.body; // Slab ID
 
     const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
 
+    const slab = await SlabRate.findById(slabId);
+    if (!slab) {
+      return res.status(400).json({ success: false, message: 'Invalid slab ID' });
+    }
+
+    // Assign the slab and its details
     user.assignedSlab = slabId;
+    user.assignedSlabDetails = slab.rates; // Store slab's rates directly
+
     await user.save();
 
-    res.status(200).json({ success: true, message: 'Slab assigned successfully' });
+    res.status(200).json({
+      success: true,
+      message: 'Slab assigned successfully',
+      user
+    });
   } catch (error) {
-    console.error('Error assigning slab:', error);
+    console.error('Error assigning slab to user:', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
