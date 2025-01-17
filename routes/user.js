@@ -359,7 +359,7 @@ router.post('/:userId/assign-slab', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
-router.put("/:userId/assign-slab", async (req, res) => {
+router.put('/:userId/assign-slab', async (req, res) => {
   const { slabId } = req.body;
   const { userId } = req.params;
 
@@ -367,26 +367,27 @@ router.put("/:userId/assign-slab", async (req, res) => {
     // Fetch the slab details
     const slab = await SlabRate.findById(slabId);
     if (!slab) {
-      return res.status(404).json({ success: false, message: "Slab not found" });
+      return res.status(404).json({ success: false, message: 'Slab not found' });
     }
 
-    // Update user with the full slab object
+    // Update the user with the full slab object in `assignedSlabDetails`
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { assignedSlab: slab },
+      { assignedSlabDetails: [slab] },
       { new: true } // Return the updated user
     );
 
     if (!updatedUser) {
-      return res.status(404).json({ success: false, message: "User not found" });
+      return res.status(404).json({ success: false, message: 'User not found' });
     }
 
-    res.status(200).json({ success: true, message: "Slab assigned successfully", user: updatedUser });
+    res.status(200).json({ success: true, message: 'Slab assigned successfully', user: updatedUser });
   } catch (error) {
-    console.error("Error assigning slab:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.error('Error assigning slab:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+
 
 
 
