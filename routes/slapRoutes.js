@@ -14,5 +14,17 @@ router.post('/', async (req, res) => {
     res.status(500).json({ success: false, message: 'Internal server error' });
   }
 });
+// Get slabs for a specific market
+router.get('/:marketId', async (req, res) => {
+  try {
+    const { marketId } = req.params;
+    const slabs = await SlabRate.find({ marketId });
+    res.status(200).json({ success: true, slabs });
+  } catch (error) {
+    console.error('Error fetching slabs:', error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
 
 module.exports = router;
