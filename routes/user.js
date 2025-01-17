@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const mongoose = require('mongoose');
 
+
 // POST: User route (Create)
 router.post('/', async (req, res) => {
   const { username, mobileNumber, password, mPin } = req.body;
