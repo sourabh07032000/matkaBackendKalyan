@@ -45,6 +45,10 @@ const UserSchema = new mongoose.Schema({
   wallet: {
     type: Number, 
     default: 10
+  },
+  assignedSlab: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'SlabRate' // Reference to the SlabRate model
   }
 }, {
   timestamps: true
