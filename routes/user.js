@@ -340,35 +340,30 @@ router.put('/:userId/assign-slab', async (req, res) => {
   const { slabId } = req.body;
   const { userId } = req.params;
 
+  if (!mongoose.Types.ObjectId.isValid(slabId) || !mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({ success: false, message: 'Invalid ID format' });
+  }
+
   try {
-    // Fetch the slab details
     const slab = await SlabRate.findById(slabId);
     if (!slab) {
       return res.status(404).json({ success: false, message: 'Slab not found' });
     }
 
-    // Update the user with the full slab object in `assignedSlabDetails`
-    const updatedUser = await User.findById(userId);
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: { assignedSlabDetails: [slab] } },
+      { new: true }
+    );
+
     if (!updatedUser) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
 
-    // Update user details
-    updatedUser.assignedSlabDetails = [slab];
-    await updatedUser.save();
-
-    res.status(200).json({
-      success: true,
-      message: 'Slab assigned successfully',
-      user: updatedUser,
-    });
+    res.status(200).json({ success: true, message: 'Slab assigned successfully', data: updatedUser });
   } catch (error) {
     console.error('Error assigning slab:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Internal server error',
-      error: error.message,
-    });
+    res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
   }
 });
 
