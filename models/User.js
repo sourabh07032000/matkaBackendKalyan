@@ -46,10 +46,11 @@ const UserSchema = new mongoose.Schema({
     type: Number, 
     default: 10
   },
- assignedSlabDetails: { 
-    type: Array, 
-    default: [] 
-  }
+assignedSlabDetails: [
+  {
+    type: mongoose.Schema.Types.Mixed, // Allows flexibility to store the full slab object
+  },
+],
 }, {
   timestamps: true
 });
