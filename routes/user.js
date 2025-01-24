@@ -51,9 +51,10 @@ router.get('/filtered', async (req, res) => {
 
   try {
     // Create query conditions dynamically based on filters
-    const query = {};
-    query['transactionRequest.status'] = "Pending"; // Filter by status inside transactionRequest
-  
+    'transactionRequest': {
+    $elemMatch: { status: "Pending" } // Matches any user where at least one transactionRequest has "Pending" status
+  }
+
 
     // Fetch users with pagination
     const users = await User.find(query)
