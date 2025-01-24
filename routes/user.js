@@ -73,8 +73,7 @@ const query = {
       // );
 
       return {
-        ...user.toObject(),
-        transactionRequest: transactions,
+        ...user.toObject()
       };
     });
 
