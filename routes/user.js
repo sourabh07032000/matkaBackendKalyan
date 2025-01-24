@@ -47,19 +47,13 @@ router.get('/', async (req, res) => {
 // GET: Retrieve all users with optional pagination for transactionRequest
 
 router.get('/filtered', async (req, res) => {
-  const { page = 1, limit = 10, username = '', status = '', transactionPage = 1, transactionLimit = 5 } = req.query;
+  const { page = 1, limit = 10, transactionPage = 1, transactionLimit = 5 } = req.query;
 
   try {
     // Create query conditions dynamically based on filters
     const query = {};
-
-    if (username) {
-      query.username = { $regex: username, $options: 'i' }; // Case-insensitive search
-    }
-
-    if (status) {
-      query['transactionRequest.status'] = status; // Filter by status inside transactionRequest
-    }
+    query['transactionRequest.status'] = status; // Filter by status inside transactionRequest
+  
 
     // Fetch users with pagination
     const users = await User.find(query)
