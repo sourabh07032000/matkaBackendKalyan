@@ -66,15 +66,15 @@ const query = {
 
     // Add paginated transaction requests for each user
     const paginatedUsers = users.map((user) => {
-      const transactions = user.transactionRequest || [];
-      const paginatedTransactions = transactions.slice(
-        (transactionPage - 1) * transactionLimit,
-        transactionPage * transactionLimit
-      );
+      const transactions = user.transactionRequest.length>0 ? user.transactionRequest || [];
+      // const paginatedTransactions = transactions.slice(
+      //   (transactionPage - 1) * transactionLimit,
+      //   transactionPage * transactionLimit
+      // );
 
       return {
         ...user.toObject(),
-        transactionRequest: paginatedTransactions,
+        transactionRequest: transactions,
       };
     });
 
