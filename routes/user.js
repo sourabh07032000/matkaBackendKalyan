@@ -52,7 +52,7 @@ router.get('/filtered', async (req, res) => {
   try {
     // Create query conditions dynamically based on filters
     const query = {};
-    query['transactionRequest.status'] = status; // Filter by status inside transactionRequest
+    query['transactionRequest.status'] = "Pending"; // Filter by status inside transactionRequest
   
 
     // Fetch users with pagination
