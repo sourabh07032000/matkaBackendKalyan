@@ -47,46 +47,46 @@ router.get('/', async (req, res) => {
 // GET: Retrieve all users with optional pagination for transactionRequest
 
 router.get('/filtered', async (req, res) => {
-  try {
-    const { 
-      page = 1, 
-      limit = 10, 
-      transactionPage = 1, 
-      transactionLimit = 5 
-    } = req.query;
+  const { page = 1, limit = 10, username = '', status = '', transactionPage = 1, transactionLimit = 5 } = req.query;
 
-    // Calculate pagination offsets
-    const skipUsers = (parseInt(page) - 1) * parseInt(limit);
-    const skipTransactions = (parseInt(transactionPage) - 1) * parseInt(transactionLimit);
+  try {
+    // Create query conditions dynamically based on filters
+    const query = {};
+
+    if (username) {
+      query.username = { $regex: username, $options: 'i' }; // Case-insensitive search
+    }
+
+    if (status) {
+      query['transactionRequest.status'] = status; // Filter by status inside transactionRequest
+    }
 
     // Fetch users with pagination
-    const users = await User.find()
-      .skip(skipUsers)
-      .limit(parseInt(limit))
-      .lean(); // `lean` improves performance for read-only operations
+    const users = await User.find(query)
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit));
 
-    // Paginate transactionRequest for each user
-    const usersWithPaginatedTransactions = users.map((user) => {
-      const paginatedTransactions = user.transactionRequest.slice(
-        skipTransactions,
-        skipTransactions + parseInt(transactionLimit)
+    // Add paginated transaction requests for each user
+    const paginatedUsers = users.map((user) => {
+      const transactions = user.transactionRequest || [];
+      const paginatedTransactions = transactions.slice(
+        (transactionPage - 1) * transactionLimit,
+        transactionPage * transactionLimit
       );
+
       return {
-        ...user,
-        transactionRequest: paginatedTransactions, // Replace with paginated transactions
+        ...user.toObject(),
+        transactionRequest: paginatedTransactions,
       };
     });
 
-    // Return paginated users and their transactions
-    res.status(200).json({
-      users: usersWithPaginatedTransactions,
-      totalUsers: await User.countDocuments(), // Total users for pagination metadata
-    });
+    res.status(200).json(paginatedUsers);
   } catch (error) {
-    console.error('Error fetching users with transactions:', error);
+    console.error('Error in /filtered route:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
+
 
 
 // GET: Retrieve a single user by ID
