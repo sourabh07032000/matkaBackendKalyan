@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
 
 // GET: Retrieve all users with optional pagination for transactionRequest
 
-router.get('/', async (req, res) => {
+router.get('/filtered', async (req, res) => {
   try {
     const { 
       page = 1, 
