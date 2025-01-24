@@ -44,6 +44,46 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET: Retrieve all users with optional pagination for transactionRequest
+router.get('/filtered', async (req, res) => {
+  try {
+    const { page = 1, limit = 10, transactionPage, transactionLimit } = req.query;
+
+    // Fetch users with pagination for the main user list
+    const skipUsers = (page - 1) * limit;
+    const users = await User.find()
+      .skip(skipUsers)
+      .limit(parseInt(limit))
+      .lean(); // Use lean() for better performance when no document methods are needed
+
+    // Apply pagination for transactionRequest in each user
+    const processedUsers = users.map((user) => {
+      if (transactionPage && transactionLimit && user.transactionRequest) {
+        const skipTransactions = (transactionPage - 1) * transactionLimit;
+        user.transactionRequest = user.transactionRequest.slice(
+          skipTransactions,
+          skipTransactions + parseInt(transactionLimit)
+        );
+      }
+      return user;
+    });
+
+    // Count total users for pagination
+    const totalUsers = await User.countDocuments();
+
+    res.status(200).json({
+      users: processedUsers,
+      totalUsers,
+      totalPages: Math.ceil(totalUsers / limit),
+      currentPage: Number(page),
+    });
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
 // GET: Retrieve a single user by ID
 router.get('/:id', async (req, res) => {
   try {
