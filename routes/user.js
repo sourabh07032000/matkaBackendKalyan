@@ -45,41 +45,46 @@ router.get('/', async (req, res) => {
 });
 
 // GET: Retrieve all users with optional pagination for transactionRequest
+
 router.get('/', async (req, res) => {
   try {
-    const { page = 1, limit = 10, transactionPage, transactionLimit } = req.query;
+    const { 
+      page = 1, 
+      limit = 10, 
+      transactionPage = 1, 
+      transactionLimit = 5 
+    } = req.query;
 
-    // Fetch users with pagination for the main user list
-    const skipUsers = (page - 1) * limit;
+    // Calculate pagination offsets
+    const skipUsers = (parseInt(page) - 1) * parseInt(limit);
+    const skipTransactions = (parseInt(transactionPage) - 1) * parseInt(transactionLimit);
+
+    // Fetch users with pagination
     const users = await User.find()
       .skip(skipUsers)
       .limit(parseInt(limit))
-      .lean(); // Use lean() for better performance when no document methods are needed
+      .lean(); // `lean` improves performance for read-only operations
 
-    // Apply pagination for transactionRequest in each user
-    const processedUsers = users.map((user) => {
-      if (transactionPage && transactionLimit && user.transactionRequest) {
-        const skipTransactions = (transactionPage - 1) * transactionLimit;
-        user.transactionRequest = user.transactionRequest.slice(
-          skipTransactions,
-          skipTransactions + parseInt(transactionLimit)
-        );
-      }
-      return user;
+    // Paginate transactionRequest for each user
+    const usersWithPaginatedTransactions = users.map((user) => {
+      const paginatedTransactions = user.transactionRequest.slice(
+        skipTransactions,
+        skipTransactions + parseInt(transactionLimit)
+      );
+      return {
+        ...user,
+        transactionRequest: paginatedTransactions, // Replace with paginated transactions
+      };
     });
 
-    // Count total users for pagination
-    const totalUsers = await User.countDocuments();
-
+    // Return paginated users and their transactions
     res.status(200).json({
-      users: processedUsers,
-      totalUsers,
-      totalPages: Math.ceil(totalUsers / limit),
-      currentPage: Number(page),
+      users: usersWithPaginatedTransactions,
+      totalUsers: await User.countDocuments(), // Total users for pagination metadata
     });
   } catch (error) {
-    console.error('Error fetching users:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error fetching users with transactions:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
 
