@@ -27,6 +27,7 @@ const paymentDetailsRoutes = require('./routes/paymentDetails'); // Payment deta
 const marketHistoryRoutes = require('./routes/marketHistory'); // Market history routes
 const notificationRoutes = require('./routes/notificationRoutes'); // Notification routes
 const slabRoutes = require('./routes/slabRoutes'); // Slab routes
+const userRoutes = require('./routes/user'); // user routes
 
 // Firebase Admin Setup for Notifications
 const admin = require('firebase-admin');
@@ -53,6 +54,7 @@ mongoose
 
 // Express Routes
 app.use('/newOtp', otpRoutes); // OTP routes
+app.use('/user', userRoutes); 
 app.use('/bet', betRoutes); // Betting routes
 app.use('/resultUpdate', resultRoutes); // Result update routes
 app.use('/api/market-data', marketDataRoutes); // Market data routes
