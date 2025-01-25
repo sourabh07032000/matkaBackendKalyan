@@ -18,18 +18,18 @@ const jsonMiddlewares = jsonServer.defaults();
 app.use(jsonServer.bodyParser);
 app.use(jsonMiddlewares);
 
-// Proxy configuration for JSON Server
-app.use(
-  '/', // Proxy route for JSON Server
-  createProxyMiddleware({
-    target: 'https://sratebackend-1.onrender.com', // Replace with JSON Server's URL
-    changeOrigin: true,
-    pathRewrite: { '^/user': '' }, // Rewrite '/users' to '/'
-  })
-);
+// // Proxy configuration for JSON Server
+// app.use(
+//   '/', // Proxy route for JSON Server
+//   createProxyMiddleware({
+//     target: 'https://sratebackend-1.onrender.com', // Replace with JSON Server's URL
+//     changeOrigin: true,
+//     pathRewrite: { '^/user': '' }, // Rewrite '/users' to '/'
+//   })
+// );
 
 // Use JSON Server for `/users` routes
-app.use('/user', jsonRouter);
+app.use('/', jsonRouter);
 
 // Routes for other services
 const otpRoutes = require('./routes/otpRoutes');
