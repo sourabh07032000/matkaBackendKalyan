@@ -10,10 +10,7 @@ const app = express();
 
 // Middleware to handle CORS
 app.use(
-  cors({
-    origin: ['http://localhost:3000', 'http://localhost:5002', 'https://sratebackend-1.onrender.com'], // Add your allowed origins here
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-  })
+  '/', jsonRouter
 );
 
 // Middleware to parse incoming JSON requests
