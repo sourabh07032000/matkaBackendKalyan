@@ -7,13 +7,13 @@ const jsonServer = require('json-server');
 
 const app = express();
 
-const jsonRouter = jsonServer.router(path.join(__dirname, 'db.json')); // Path to db.json
-const jsonMiddlewares = jsonServer.defaults();
-app.use(jsonServer.bodyParser);
-app.use(jsonMiddlewares);
+// const jsonRouter = jsonServer.router(path.join(__dirname, 'db.json')); // Path to db.json
+// const jsonMiddlewares = jsonServer.defaults();
+// app.use(jsonServer.bodyParser);
+// app.use(jsonMiddlewares);
 
-// Use JSON Server for user-related routes
-app.use('/', jsonRouter); // Replace the MongoDB user route with JSON Server
+// // Use JSON Server for user-related routes
+// app.use('/', jsonRouter); // Replace the MongoDB user route with JSON Server
 
 
 // Middleware to handle CORS
