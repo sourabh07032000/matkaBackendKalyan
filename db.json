@@ -825,7 +825,7 @@
         "upiphoneNumber": "8889228888",
         "isApproved": "Approved"
       },
-      "_id": "6787dc374416c30f42c14074",
+      "id": "6787dc374416c30f42c14074",
       "username": "Sourabh Choudhary",
       "mobileNumber": "8889223659",
       "password": "1111",
@@ -853,10 +853,17 @@
           "username": "Sourabh Choudhary",
           "phone": "8889223659",
           "message": "fakee"
+        },
+        {
+          "amount": "50",
+          "status": "Approved",
+          "requestTime": 1737804763947,
+          "utrNumber": "",
+          "message": "Testing"
         }
       ],
-      "isDeposit": true,
-      "isWithdrawal": true,
+      "isDeposit": false,
+      "isWithdrawal": false,
       "betDetails": [
         {
           "betAmount": 60,
@@ -1000,47 +1007,39 @@
           },
           "message": "trial",
           "rejectedAt": "2025-01-25T04:37:32.053Z"
+        },
+        {
+          "amount": "500",
+          "status": "Approved",
+          "requestTime": 1737804747774,
+          "message": "Testing"
         }
       ],
-      "wallet": 45650,
+      "wallet": 45200,
       "createdAt": "2025-01-15T16:03:03.160Z",
       "updatedAt": "2025-01-25T04:37:32.588Z",
       "__v": 6,
-      "assignedSlabDetails": []
+      "assignedSlabDetails": [],
+      "adminProfitLoss": -4500
     },
     {
-      "bankDetails": {
-        "upiphoneNumber": "1209876524",
-        "isApproved": "Approved"
-      },
-      "_id": "6787de664416c30f42c140f9",
-      "username": "pradhumn",
-      "mobileNumber": "9630709988",
-      "password": "1234",
-      "mPin": "1234",
       "transactionRequest": [
         {
-          "amount": "1250",
-          "status": "Rejected",
-          "requestTime": "2025-01-23T07:03:40.916Z",
-          "utrNumber": "123456789012",
-          "username": "pradhumn",
-          "message": "Test"
-        },
-        {
           "amount": "100",
-          "status": "Approved",
+          "status": "Pending",
           "requestTime": "2025-01-24T07:50:33.149Z",
           "utrNumber": "123456789012",
-          "username": "pradhumn"
+          "username": "pradhumn",
+          "phone": "9630709988"
         },
         {
           "amount": "99",
-          "status": "Rejected",
+          "status": "Pending",
           "requestTime": "2025-01-24T07:53:10.855Z",
           "utrNumber": "963070998899",
+          "message": "Testing",
           "username": "pradhumn",
-          "message": "Fake"
+          "phone": "9630709988"
         },
         {
           "amount": "200",
@@ -1048,309 +1047,47 @@
           "requestTime": "2025-01-24T08:20:20.084Z",
           "utrNumber": "258008523612",
           "username": "pradhumn",
-          "message": "FAKE"
+          "phone": "9630709988",
+          "message": "Testing"
+        },
+        {
+          "amount": "100",
+          "status": "Approved",
+          "requestTime": 1737804424959,
+          "utrNumber": "",
+          "message": "Testing"
         },
         {
           "amount": "200",
           "status": "Approved",
-          "requestTime": 1737714321609,
+          "requestTime": 1737804854435,
           "utrNumber": "",
-          "username": "6787de664416c30f42c140f9",
-          "message": "For TEsting SPDP"
-        },
-        {
-          "amount": "210",
-          "status": "Approved",
-          "requestTime": 1737736353104,
-          "utrNumber": "",
-          "username": "6787de664416c30f42c140f9",
-          "message": "mjee"
-        },
-        {
-          "amount": "20",
-          "status": "Rejected",
-          "requestTime": "2025-01-24T19:11:09.756Z",
-          "utrNumber": "963070998815",
-          "username": "pradhumn",
-          "message": "trial"
+          "message": "Testing"
         }
       ],
-      "isDeposit": true,
-      "isWithdrawal": true,
-      "betDetails": [
-        {
-          "betAmount": "10",
-          "matkaBetType": {
-            "id": 1,
-            "category": "Single Digit",
-            "description": "10 ka 100",
-            "multiplier": 10,
-            "icon": 2
-          },
-          "matkaBetNumber": "5",
-          "user": "pradhumn",
-          "market_id": "SRIDEVI NIGHT",
-          "betTime": "Close",
-          "status": "Lost",
-          "betNo": "2025-01-15T16:17:51.838Z",
-          "matchResult": {
-            "_id": "6773a87856798db0e8014e0c",
-            "open_time_formatted": "07:10 PM",
-            "close_time_formatted": "08:10 PM",
-            "open_time": "2024-12-29 19:15:00",
-            "close_time": "2024-12-29 20:15:00",
-            "market_id": "45",
-            "market_name": "SRIDEVI NIGHT",
-            "aankdo_date": "2025-01-15",
-            "aankdo_open": "699",
-            "aankdo_close": "444",
-            "figure_open": "4",
-            "figure_close": "2",
-            "jodi": "42",
-            "updatedAt": "2025-01-16T12:55:09.451Z",
-            "market_on": true,
-            "aankdo_close_close_time": "08:10 PM",
-            "aankdo_open_close_time": "07:10 PM"
-          },
-          "username": "pradhumn",
-          "userId": "6787de664416c30f42c140f9"
-        },
-        {
-          "betAmount": "100",
-          "matkaBetType": {
-            "id": 1,
-            "category": "Single Digit",
-            "description": "10 ka 100",
-            "multiplier": 10,
-            "icon": 2
-          },
-          "matkaBetNumber": "4",
-          "user": "pradhumn",
-          "market_id": "TEST",
-          "betTime": "Close",
-          "status": "Lost",
-          "betNo": "2025-01-24T05:24:26.059Z",
-          "matchResult": {
-            "_id": "679322edd227f09486412b37",
-            "open_time_formatted": "11:00 AM",
-            "close_time_formatted": "11:35 AM",
-            "market_name": "TEST",
-            "aankdo_date": "2025-01-24",
-            "aankdo_open": "123",
-            "aankdo_close": "123",
-            "figure_open": "6",
-            "figure_close": "6",
-            "jodi": "66",
-            "aankdo_open_close_time": "11:00 AM",
-            "aankdo_close_close_time": "11:35 AM",
-            "market_on": true,
-            "createdAt": "2025-01-24T05:19:41.801Z",
-            "updatedAt": "2025-01-24T05:23:21.872Z",
-            "__v": 0
-          },
-          "username": "pradhumn",
-          "userId": "6787de664416c30f42c140f9"
-        },
-        {
-          "betAmount": "100",
-          "matkaBetType": {
-            "id": 1,
-            "category": "Single Digit",
-            "description": "10 ka 100",
-            "multiplier": 10,
-            "icon": 2
-          },
-          "matkaBetNumber": "4",
-          "user": "pradhumn",
-          "market_id": "TEST",
-          "betTime": "Close",
-          "status": "Lost",
-          "betNo": "2025-01-24T05:24:30.053Z",
-          "matchResult": {
-            "_id": "679322edd227f09486412b37",
-            "open_time_formatted": "11:00 AM",
-            "close_time_formatted": "11:35 AM",
-            "market_name": "TEST",
-            "aankdo_date": "2025-01-24",
-            "aankdo_open": "123",
-            "aankdo_close": "123",
-            "figure_open": "6",
-            "figure_close": "6",
-            "jodi": "66",
-            "aankdo_open_close_time": "11:00 AM",
-            "aankdo_close_close_time": "11:35 AM",
-            "market_on": true,
-            "createdAt": "2025-01-24T05:19:41.801Z",
-            "updatedAt": "2025-01-24T05:23:21.872Z",
-            "__v": 0
-          },
-          "username": "pradhumn",
-          "userId": "6787de664416c30f42c140f9"
-        },
-        {
-          "betAmount": "200",
-          "matkaBetType": {
-            "id": 1,
-            "category": "Single Digit",
-            "description": "10 ka 100",
-            "multiplier": 10,
-            "icon": 2
-          },
-          "matkaBetNumber": "2",
-          "user": "pradhumn",
-          "market_id": "TEST",
-          "betTime": "Close",
-          "status": "Lost",
-          "betNo": "2025-01-24T05:47:59.120Z",
-          "matchResult": {
-            "_id": "679322edd227f09486412b37",
-            "open_time_formatted": "11:00 AM",
-            "close_time_formatted": "11:35 AM",
-            "market_name": "TEST",
-            "aankdo_date": "2025-01-24",
-            "aankdo_open": "123",
-            "aankdo_close": "456",
-            "figure_open": "6",
-            "figure_close": "5",
-            "jodi": "65",
-            "aankdo_open_close_time": "11:00 AM",
-            "aankdo_close_close_time": "11:35 AM",
-            "market_on": true,
-            "createdAt": "2025-01-24T05:19:41.801Z",
-            "updatedAt": "2025-01-24T05:50:06.212Z",
-            "__v": 0
-          },
-          "username": "pradhumn",
-          "userId": "6787de664416c30f42c140f9"
-        },
-        {
-          "betAmount": 120,
-          "matkaBetType": {
-            "id": 12,
-            "category": "SP",
-            "description": "10 ka 1500",
-            "multiplier": 12.5,
-            "icon": 7
-          },
-          "matkaBetNumber": "1",
-          "user": "pradhumn",
-          "market_id": "TEST",
-          "betTime": "Open",
-          "status": "Lost",
-          "betNo": "2025-01-24T10:26:30.124Z",
-          "matchResult": {
-            "_id": "67936a74d227f09486416ec0",
-            "open_time_formatted": "05:00 PM",
-            "close_time_formatted": "06:00 PM",
-            "market_name": "TEST",
-            "aankdo_date": "2025-01-24",
-            "aankdo_open": "128",
-            "aankdo_close": "XXX",
-            "figure_open": "1",
-            "figure_close": "X",
-            "jodi": "1X",
-            "aankdo_open_close_time": "05:00 PM",
-            "aankdo_close_close_time": "06:00 PM",
-            "market_on": true,
-            "createdAt": "2025-01-24T10:24:52.929Z",
-            "updatedAt": "2025-01-24T10:25:33.560Z",
-            "__v": 0
-          },
-          "username": "pradhumn",
-          "userId": "6787de664416c30f42c140f9"
-        },
-        {
-          "betAmount": 90,
-          "matkaBetType": {
-            "id": 13,
-            "category": "DP",
-            "description": "10 ka 3000",
-            "multiplier": 33.3333333333333,
-            "icon": 7
-          },
-          "matkaBetNumber": "6",
-          "user": "pradhumn",
-          "market_id": "TEST",
-          "betTime": "Open",
-          "status": "Lost",
-          "betNo": "2025-01-24T10:27:54.056Z",
-          "matchResult": {
-            "_id": "67936a74d227f09486416ec0",
-            "open_time_formatted": "05:00 PM",
-            "close_time_formatted": "06:00 PM",
-            "market_name": "TEST",
-            "aankdo_date": "2025-01-24",
-            "aankdo_open": "128",
-            "aankdo_close": "XXX",
-            "figure_open": "1",
-            "figure_close": "X",
-            "jodi": "1X",
-            "aankdo_open_close_time": "05:00 PM",
-            "aankdo_close_close_time": "06:00 PM",
-            "market_on": true,
-            "createdAt": "2025-01-24T10:24:52.929Z",
-            "updatedAt": "2025-01-24T10:25:33.560Z",
-            "__v": 0
-          },
-          "username": "pradhumn",
-          "userId": "6787de664416c30f42c140f9"
-        },
-        {
-          "betAmount": "10",
-          "matkaBetType": {
-            "id": 1,
-            "category": "Single Digit",
-            "description": "10 ka 100",
-            "multiplier": 10,
-            "icon": 2
-          },
-          "matkaBetNumber": "3",
-          "user": "pradhumn",
-          "market_id": "TEST",
-          "betTime": "Close",
-          "status": "Lost",
-          "betNo": "2025-01-24T19:10:29.174Z",
-          "matchResult": {
-            "_id": "67936a74d227f09486416ec0",
-            "open_time_formatted": "05:00 PM",
-            "close_time_formatted": "06:00 PM",
-            "market_name": "TEST",
-            "aankdo_date": "2025-01-24",
-            "aankdo_open": "128",
-            "aankdo_close": "122",
-            "figure_open": "1",
-            "figure_close": "5",
-            "jodi": "15",
-            "aankdo_open_close_time": "05:00 PM",
-            "aankdo_close_close_time": "06:00 PM",
-            "market_on": true,
-            "createdAt": "2025-01-24T10:24:52.929Z",
-            "updatedAt": "2025-01-25T04:05:50.679Z",
-            "__v": 0
-          }
-        }
-      ],
+      "id": "6787de664416c30f42c140f9",
+      "username": "pradhumn",
+      "mobileNumber": "9630709988",
+      "password": "1234",
+      "mPin": "1234",
+      "isWithdrawal": false,
+      "betDetails": [],
       "withdrawalRequest": [
         {
-          "amount": "100",
+          "amount": "1000",
           "status": "Rejected",
-          "requestTime": "2025-01-24T09:32:44.356Z",
-          "upiPhoneNumber": "8878084604",
+          "requestTime": "2025-01-24T10:40:47.157Z",
+          "upiPhoneNumber": "9630709988",
           "username": "pradhumn",
+          "message": "Test",
+          "rejectedAt": "2025-01-25T11:23:48.400Z",
           "mobile": "9630709988",
-          "bankDetails": {
-            "upiphoneNumber": "8878084604",
-            "isApproved": "Approved"
-          },
-          "message": "esee hi",
-          "rejectedAt": "2025-01-24T09:35:11.039Z"
+          "approvedAt": "2025-01-25T11:23:18.061Z"
         }
       ],
-      "wallet": 290,
-      "createdAt": "2025-01-15T16:12:22.865Z",
-      "updatedAt": "2025-01-25T04:37:06.770Z",
-      "__v": 6,
-      "assignedSlabDetails": []
+      "wallet": 600,
+      "isDeposit": false,
+      "adminProfitLoss": 0
     },
     {
       "bankDetails": {
