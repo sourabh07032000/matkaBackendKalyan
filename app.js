@@ -4,44 +4,31 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const jsonServer = require('json-server');
-const { createProxyMiddleware } = require('http-proxy-middleware'); // For proxying JSON Server requests
 
 const app = express();
 
+// Middleware to handle CORS
+app.use(cors());
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
 
-// JSON Server Setup
-const jsonRouter = jsonServer.router(path.join(__dirname, 'db.json')); // Path to db.json
+// JSON Server Setup (for `/user` route)
+const jsonRouter = jsonServer.router(path.join(__dirname, 'db.json')); // Path to `db.json`
 const jsonMiddlewares = jsonServer.defaults();
-app.use(jsonServer.bodyParser);
-app.use(jsonMiddlewares);
+app.use('/user', jsonMiddlewares, jsonServer.bodyParser, jsonRouter); // `/user` routes handled by JSON Server
 
-// Proxy configuration for JSON Server
-app.use(
-  '/', // Proxy route for JSON Server
-  createProxyMiddleware({
-    target: 'https://sratebackend-1.onrender.com', // Replace with JSON Server's URL
-    changeOrigin: true,
-    pathRewrite: { '^/user': '' }, // Rewrite '/users' to '/'
-  })
-);
+// Express Routes for other services
+const otpRoutes = require('./routes/otpRoutes'); // OTP routes
+const betRoutes = require('./routes/betRoutes'); // Betting routes
+const marketDataRoutes = require('./routes/marketData'); // Market data routes
+const resultRoutes = require('./routes/resultUpdate'); // Result update routes
+const paymentDetailsRoutes = require('./routes/paymentDetails'); // Payment details routes
+const marketHistoryRoutes = require('./routes/marketHistory'); // Market history routes
+const notificationRoutes = require('./routes/notificationRoutes'); // Notification routes
+const slabRoutes = require('./routes/slabRoutes'); // Slab routes
 
-// Use JSON Server for `/users` routes
-app.use('/', jsonRouter);
-
-// Routes for other services
-const otpRoutes = require('./routes/otpRoutes');
-const betRoutes = require('./routes/betRoutes');
-const marketDataRoutes = require('./routes/marketData');
-const resultRoutes = require('./routes/resultUpdate');
-const paymentDetailsRoutes = require('./routes/paymentDetails');
-const marketHistoryRoutes = require('./routes/marketHistory');
-const notificationRoutes = require('./routes/notificationRoutes'); // Notification route
-const slabRoutes = require('./routes/slabRoutes');
-
-// Firebase Admin Setup
+// Firebase Admin Setup for Notifications
 const admin = require('firebase-admin');
 admin.initializeApp({
   credential: admin.credential.applicationDefault(),
@@ -50,16 +37,6 @@ admin.initializeApp({
 
 // Add Firebase Admin to app locals for shared use across routes
 app.locals.admin = admin;
-
-// Use Express Routes
-app.use('/newOtp', otpRoutes);
-app.use('/bet', betRoutes);
-app.use('/resultUpdate', resultRoutes);
-app.use('/api', jsonRouter);
-app.use('/api/', paymentDetailsRoutes);
-app.use('/api/marketHistory', marketHistoryRoutes);
-app.use('/notifications', notificationRoutes);
-app.use('/api/slabs', slabRoutes);
 
 // MongoDB Connection
 mongoose
@@ -74,6 +51,16 @@ mongoose
     console.error('MongoDB connection error:', error);
   });
 
+// Express Routes
+app.use('/newOtp', otpRoutes); // OTP routes
+app.use('/bet', betRoutes); // Betting routes
+app.use('/resultUpdate', resultRoutes); // Result update routes
+app.use('/api/market-data', marketDataRoutes); // Market data routes
+app.use('/api/', paymentDetailsRoutes); // Payment details routes
+app.use('/api/marketHistory', marketHistoryRoutes); // Market history routes
+app.use('/notifications', notificationRoutes); // Notification routes
+app.use('/api/slabs', slabRoutes); // Slab routes
+
 // Test Route
 app.get('/test', (req, res) => {
   res.status(200).send('Server is running');
@@ -85,10 +72,10 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: 'Internal Server Error', error: err.message });
 });
 
-// Define the port
+// Define the Port
 const PORT = process.env.PORT || 5002;
 
-// Start the server
+// Start the Server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
