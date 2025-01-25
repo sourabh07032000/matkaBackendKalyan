@@ -27,7 +27,7 @@ app.use(jsonMiddlewares);
 
 // Proxy configuration for JSON Server
 app.use(
-  '/users', // Proxy route for JSON Server
+  '/', // Proxy route for JSON Server
   createProxyMiddleware({
     target: 'http://localhost:5002', // Replace with JSON Server's URL
     changeOrigin: true,
