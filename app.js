@@ -18,7 +18,7 @@ app.use(
 app.use(express.json());
 
 // MongoDB-based Routes
-// const userRoutes = require('./routes/user'); // Comment out the MongoDB-based user routes
+const userRoutes = require('./routes/user'); // Comment out the MongoDB-based user routes
 const otpRoutes = require('./routes/otpRoutes');
 const betRoutes = require('./routes/betRoutes');
 const marketDataRoutes = require('./routes/marketData');
@@ -39,7 +39,7 @@ admin.initializeApp({
 app.locals.admin = admin;
 
 // Use MongoDB-based Routes
-// app.use('/user', userRoutes); // Comment out the MongoDB-based user routes
+app.use('/user', userRoutes); // Comment out the MongoDB-based user routes
 app.use('/newOtp', otpRoutes);
 app.use('/bet', betRoutes);
 app.use('/resultUpdate', resultRoutes);
@@ -56,7 +56,7 @@ app.use(jsonServer.bodyParser);
 app.use(jsonMiddlewares);
 
 // Use JSON Server for user-related routes
-app.use('/user', jsonRouter); // Replace the MongoDB user route with JSON Server
+// app.use('/user', jsonRouter); // Replace the MongoDB user route with JSON Server
 
 // Connect to MongoDB (Keep for other routes)
 mongoose
