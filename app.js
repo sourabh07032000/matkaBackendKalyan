@@ -62,7 +62,7 @@ app.locals.admin = admin;
 app.use('/newOtp', otpRoutes);
 app.use('/bet', betRoutes);
 app.use('/resultUpdate', resultRoutes);
-app.use('/api/market-data', marketDataRoutes);
+app.use('/api', jsonRouter);
 app.use('/api/', paymentDetailsRoutes);
 app.use('/api/marketHistory', marketHistoryRoutes);
 app.use('/notifications', notificationRoutes);
