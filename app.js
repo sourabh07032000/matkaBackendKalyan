@@ -8,10 +8,6 @@ const { createProxyMiddleware } = require('http-proxy-middleware'); // For proxy
 
 const app = express();
 
-// Middleware to handle CORS
-app.use(
-  '/', jsonRouter
-);
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
@@ -26,14 +22,14 @@ app.use(jsonMiddlewares);
 app.use(
   '/', // Proxy route for JSON Server
   createProxyMiddleware({
-    target: 'http://localhost:5002', // Replace with JSON Server's URL
+    target: 'https://sratebackend-1.onrender.com', // Replace with JSON Server's URL
     changeOrigin: true,
-    pathRewrite: { '^/users': '' }, // Rewrite '/users' to '/'
+    pathRewrite: { '^/user': '' }, // Rewrite '/users' to '/'
   })
 );
 
 // Use JSON Server for `/users` routes
-app.use('/users', jsonRouter);
+app.use('/user', jsonRouter);
 
 // Routes for other services
 const otpRoutes = require('./routes/otpRoutes');
