@@ -16,7 +16,7 @@ app.use(express.json());
 // JSON Server Setup (for `/user` route)
 const jsonRouter = jsonServer.router(path.join(__dirname, 'db.json')); // Path to `db.json`
 const jsonMiddlewares = jsonServer.defaults();
-app.use('/user', jsonMiddlewares, jsonServer.bodyParser, jsonRouter); // `/user` routes handled by JSON Server
+app.use('/users', jsonMiddlewares, jsonServer.bodyParser, jsonRouter); // `/user` routes handled by JSON Server
 
 // Express Routes for other services
 const otpRoutes = require('./routes/otpRoutes'); // OTP routes
