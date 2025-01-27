@@ -4,8 +4,14 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const jsonServer = require('json-server');
+const bodyParser = require("body-parser");
 
 const app = express();
+// Increase the request size limit
+app.use(bodyParser.json({ limit: "100mb" }));
+app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
+
+
 
 // Middleware to handle CORS
 app.use(cors());
