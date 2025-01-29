@@ -8,6 +8,11 @@ const SlabRate = require("../models/SlabRate");
 // POST: User route (Create)
 router.post('/', async (req, res) => {
   const { username, mobileNumber, password, mPin } = req.body;
+  // Check if username contains only letters (extra validation before saving)
+  if (!/^[A-Za-z]+$/.test(username)) {
+      return res.status(400).json({ error: 'Username can only contain alphabetic characters' });
+  }
+
 
   // Validation
   if (!username || !mobileNumber || !password || !mPin) {
