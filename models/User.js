@@ -5,7 +5,9 @@ const UserSchema = new mongoose.Schema({
   username: { 
     type: String, 
     required: true, 
-    unique: true 
+    unique: true,
+    match: [/^[A-Za-z]+$/, "Username can only contain alphabetic characters"]
+
   },
   mobileNumber: { 
     type: String, 
