@@ -1,0 +1,29 @@
+name: Auto Backup db.json
+
+on:
+  schedule:
+    - cron: '0 18 * * *'  # Every day at 12:00 AM IST (18:00 UTC)
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Create Backup
+        run: |
+          mkdir -p backups
+          cp db.json backups/db_$(date +%Y-%m-%d_%H-%M-%S).json
+
+      - name: Commit and Push Changes
+        run: |
+          git add backups/
+          git commit -m "🔄 Daily Backup: $(date +%Y-%m-%d)" || echo "No changes to commit"
+          git push origin main
+
