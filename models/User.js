@@ -31,7 +31,7 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-  betDetails: Array,
+  betDetails: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Bet' }],
   bankDetails: {
     accountNumber: String,
     ifscCode: String,
