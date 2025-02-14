@@ -1,34 +1,19 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const betSchema = new mongoose.Schema({
-  betAmount: {
-    type: String,
-    required: true,
-  },
-  matkaBetType: {
-    type: Object,
-    required: true,
-  },
-  matkaBetNumber: {
-    type: Number,
-    required: true,
-  },
-  user: {
-    type: String, 
-    required: true,
-  },
-  betPlacedTiming: {
-    type: Date,
-    default: Date.now,
-  },
-  market_id: {
-    type: String,
-    required: true,
-  },
-  betTime: {
-    type: String,
-    required: true,
-  },
+const BetSchema = new mongoose.Schema({
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // ✅ Reference to User
+    betNo: String,
+    market_id: String,
+    betTime: String,
+    matkaBetNumber: String,
+    betAmount: Number,
+    status: { type: String, default: "Pending" },
+    matchResult: String,
+    matkaBetType: {
+        category: String,
+        multiplier: Number
+    }
 });
 
-module.exports = mongoose.model('Bet', betSchema);
+const Bet = mongoose.model("Bet", BetSchema);
+module.exports = Bet;
