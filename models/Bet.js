@@ -8,7 +8,7 @@ const BetSchema = new mongoose.Schema({
     matkaBetNumber: String,
     betAmount: Number,
     status: { type: String, default: "Pending" },
-    matchResult: String,
+    matchResult: Object,
     matkaBetType: {
         category: String,
         multiplier: Number
