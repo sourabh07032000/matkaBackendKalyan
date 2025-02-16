@@ -6,7 +6,7 @@ const User = require("../models/User");
 
 // Process Market Results API
 router.post("/process-market-results", async (req, res) => {
-  const { market_name, figure_open, figure_close, aankdo_open, aankdo_close } =
+  const { market_name, figure_open, figure_close, aankdo_open, aankdo_close, jodi } =
     req.body;
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -121,14 +121,14 @@ router.post("/process-market-results", async (req, res) => {
         winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
       } else if (
         bet.matkaBetType.category === "Jodi" &&
-        bet.matkaBetNumber === market.jodi
+        bet.matkaBetNumber === jodi
       ) {
         isWinner = true;
         winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
       } else if (
         bet.matkaBetType.category === "Jodi" &&
-        market.jodi.includes("X") &&
-        bet.matkaBetNumber.slice(0, 1) === market.jodi.slice(0, 1)
+        jodi.includes("X") &&
+        bet.matkaBetNumber.slice(0, 1) === jodi.slice(0, 1)
       ) {
         isWinner = "Pending";
         winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
