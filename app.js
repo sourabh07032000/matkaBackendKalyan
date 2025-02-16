@@ -62,7 +62,7 @@ mongoose
 app.use('/newOtp', otpRoutes); // OTP routes
 app.use('/user', userRoutes); 
 app.use('/bet', betRoutes); // Betting routes
-app.use('/resultUpdate', resultRoutes); // Result update routes
+app.use('/api', resultRoutes); // Result update routes
 app.use('/api/market-data', marketDataRoutes); // Market data routes
 app.use('/api/', paymentDetailsRoutes); // Payment details routes
 app.use('/api/marketHistory', marketHistoryRoutes); // Market history routes
