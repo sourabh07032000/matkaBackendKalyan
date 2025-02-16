@@ -579,6 +579,10 @@ router.post("/process-market-results", async (req, res) => {
                 figure_close: figure_close,
                 figure_open: figure_open
               },
+              matkaBetType:{
+                multiplier:srMultiplier,
+                category: bet.matkaBetType.category
+              },
             },
           },
         },
