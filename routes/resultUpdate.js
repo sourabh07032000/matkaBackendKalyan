@@ -330,7 +330,6 @@ router.post("/process-market-results", async (req, res) => {
           }
           winningAmount = bet.betAmount * 15;
           srMultiplier = 15;
-          alert(winningAmount);
         } else if (output.length === 2 && output2.length === 2) {
           for (let i of bet.matkaBetNumber) {
             if (aankdo_open.includes(i)) {
@@ -342,7 +341,6 @@ router.post("/process-market-results", async (req, res) => {
           }
           winningAmount = bet.betAmount * 30;
           srMultiplier = 30;
-          alert(winningAmount);
         } else if (output.length === 1 && output2.length === 2) {
           if (aankdo_open.includes(bet.matkaBetNumber)) {
             isWinner = true;
@@ -351,7 +349,6 @@ router.post("/process-market-results", async (req, res) => {
           }
           winningAmount = bet.betAmount * 30;
           srMultiplier = 30;
-          alert(winningAmount);
         } else if (output.length === 1 && output2.length === 1) {
           if (aankdo_open.includes(bet.matkaBetNumber)) {
             isWinner = true;
@@ -360,7 +357,7 @@ router.post("/process-market-results", async (req, res) => {
           }
           winningAmount = bet.betAmount * 90;
           srMultiplier = 90;
-          alert(winningAmount);
+        
         }
       } else if (
         bet.matkaBetType.category === "SR" &&
