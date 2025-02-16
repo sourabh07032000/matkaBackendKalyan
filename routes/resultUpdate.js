@@ -60,7 +60,7 @@ router.post("/process-market-results", async (req, res) => {
           +aankdo_open[0] +
           +aankdo_open[1] +
           +aankdo_open[2];
-        if (totalNumber == bet.matkaBetNumber) {
+        if (totalNumber.toString().at(-1) == bet.matkaBetNumber) {
           isWinner = true;
           winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
         }
@@ -74,7 +74,7 @@ router.post("/process-market-results", async (req, res) => {
           +aankdo_close[0] +
           +aankdo_close[1] +
           +aankdo_close[2];
-        if (totalNumber == bet.matkaBetNumber) {
+        if (totalNumber.toString().at(-1) == bet.matkaBetNumber) {
           isWinner = true;
           winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
         }
@@ -94,7 +94,7 @@ router.post("/process-market-results", async (req, res) => {
           +aankdo_open[0] +
           +aankdo_open[1] +
           +aankdo_open[2];
-        if (totalNumber == bet.matkaBetNumber) {
+        if (totalNumber.toString().at(-1) == bet.matkaBetNumber) {
           isWinner = true;
           winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
         }
@@ -108,7 +108,7 @@ router.post("/process-market-results", async (req, res) => {
           +aankdo_close[0] +
           +aankdo_close[1] +
           +aankdo_close[2];
-        if (totalNumber == bet.matkaBetNumber) {
+        if (totalNumber.toString().at(-1) == bet.matkaBetNumber) {
           isWinner = true;
           winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
         }
