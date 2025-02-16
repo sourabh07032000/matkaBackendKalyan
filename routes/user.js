@@ -12,21 +12,26 @@ router.post('/', async (req, res) => {
   if (!/^[A-Za-z]+$/.test(username)) {
       return res.status(400).json({ error: 'Username can only contain alphabetic characters' });
   }
+
+
   // Validation
   if (!username || !mobileNumber || !password || !mPin) {
     return res.status(400).json({ message: 'All fields are required' });
   }
+
   try {
     // Check if user already exists
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists with this email' });
     }
+
     // Create new user
     const user = new User({  username, mobileNumber, password, mPin });
     await user.save();
     res.status(201).json({ message: 'User registered successfully', user });
   } 
+  
   catch (error) {
     console.error('User Error:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -114,31 +119,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-// ✅ Update User Wallet Balance
-router.patch("/:userId", async (req, res) => {
-    try {
-        const { userId } = req.params;
-        const { wallet } = req.body;
-
-        // Find user and update wallet balance only
-        const updatedUser = await User.findByIdAndUpdate(
-            userId,
-            { $set: { wallet } },
-            { new: true } // Return updated user data
-        );
-
-        if (!updatedUser) {
-            return res.status(404).json({ error: "User not found" });
-        }
-
-        res.json({ message: "Wallet updated successfully", user: updatedUser });
-    } catch (error) {
-        console.error("Error updating wallet:", error);
-        res.status(500).json({ error: "Server error" });
-    }
-});
-
 
 // PUT: Update user information
 // Update the main PUT route to handle bankDetails properly
