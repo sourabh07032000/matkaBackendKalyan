@@ -48,6 +48,17 @@ router.get("/user-bets/:userId", async (req, res) => {
         res.status(500).json({ message: "Error fetching bets", error: error.message });
     }
 });
+// ✅ 2. Get All Bets of a User
+router.get("/user-bets", async (req, res) => {
+    try {
+       
+        const bets = await Bet.find( req.body ).populate("user_id", "username") // Fetch the username from the users collection
+
+        res.status(200).json(bets);
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching bets", error: error.message });
+    }
+});
 
 // ✅ 3. Update Bet Status (For Processing Results)
 router.patch("/update-bet/:betId", async (req, res) => {
@@ -90,5 +101,5 @@ router.delete("/delete-bet/:betId", async (req, res) => {
     }
 });
 
-module.exports = router;
 
+module.exports = router;
