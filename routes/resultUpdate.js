@@ -580,7 +580,7 @@ router.post("/process-market-results", async (req, res) => {
                 figure_open: figure_open
               },
               matkaBetType:{
-                multiplier:srMultiplier,
+                multiplier: bet.matkaBetType.category == "Cut" || bet.matkaBetType.category == "SR" ? srMultiplier : bet.matkaBetType.multiplier,
                 category: bet.matkaBetType.category
               },
             },
