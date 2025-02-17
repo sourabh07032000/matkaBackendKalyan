@@ -131,7 +131,7 @@ router.post("/process-market-results", async (req, res) => {
         bet.matkaBetNumber.slice(0, 1) === jodi.slice(0, 1)
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       } else if (
         bet.matkaBetType.category === "Single Pana" &&
         ((bet.betTime === "Open" &&
