@@ -50,7 +50,7 @@ router.post("/process-market-results", async (req, res) => {
         figure_close.includes("X") // Only process if close number is set
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       } else if (
         bet.matkaBetType.category === "SP" &&
         bet.betTime === "Open" &&
@@ -84,7 +84,7 @@ router.post("/process-market-results", async (req, res) => {
         figure_close.includes("X") // Only process if close number is set
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       } else if (
         bet.matkaBetType.category === "DP" &&
         bet.betTime === "Open" &&
