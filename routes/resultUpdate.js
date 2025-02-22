@@ -118,7 +118,7 @@ router.post("/process-market-results", async (req, res) => {
         figure_close.includes("X") // Only process if close number is set
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       } else if (
         bet.matkaBetType.category === "Jodi" &&
         bet.matkaBetNumber === jodi
@@ -148,7 +148,7 @@ router.post("/process-market-results", async (req, res) => {
         aankdo_close === "XXX" // Only process if close number is set
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       } else if (
         bet.matkaBetType.category === "Cut" &&
         bet.betTime === "Open"
@@ -308,6 +308,7 @@ router.post("/process-market-results", async (req, res) => {
           isWinner = true;
         } else {
           isWinner = false;
+          winningAmount = 0
         }
       } else if (
         bet.matkaBetType.category === "Cut" &&
@@ -315,7 +316,7 @@ router.post("/process-market-results", async (req, res) => {
         aankdo_close === "XXX"
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       } else if (bet.matkaBetType.category === "SR" && bet.betTime === "Open") {
         let output = [...new Set(bet.matkaBetNumber)];
         let output2 = [...new Set(aankdo_open)];
