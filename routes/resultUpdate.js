@@ -329,7 +329,7 @@ router.post("/process-market-results", async (req, res) => {
               break;
             }
           }
-          winningAmount = bet.betAmount * 15;
+          winningAmount = isWinner ? bet.betAmount * 15 : 0;
           srMultiplier = 15;
         } else if (output.length === 2 && output2.length === 2) {
           for (let i of bet.matkaBetNumber) {
@@ -340,7 +340,7 @@ router.post("/process-market-results", async (req, res) => {
               break;
             }
           }
-          winningAmount = bet.betAmount * 30;
+          winningAmount = isWinner ? bet.betAmount * 30 : 0;
           srMultiplier = 30;
         } else if (output.length === 1 && output2.length === 2) {
           if (aankdo_open.includes(bet.matkaBetNumber)) {
@@ -348,7 +348,7 @@ router.post("/process-market-results", async (req, res) => {
           } else {
             isWinner = false;
           }
-          winningAmount = bet.betAmount * 30;
+          winningAmount =  isWinner ? bet.betAmount * 30 : 0;;
           srMultiplier = 30;
         } else if (output.length === 1 && output2.length === 1) {
           if (aankdo_open.includes(bet.matkaBetNumber)) {
@@ -356,7 +356,7 @@ router.post("/process-market-results", async (req, res) => {
           } else {
             isWinner = false;
           }
-          winningAmount = bet.betAmount * 90;
+          winningAmount =  isWinner ? bet.betAmount * 90 : 0;
           srMultiplier = 90;
         
         }
@@ -376,7 +376,7 @@ router.post("/process-market-results", async (req, res) => {
               break;
             }
           }
-          winningAmount = bet.betAmount * 15;
+          winningAmount =  isWinner ? bet.betAmount * 15 : 0;
           srMultiplier = 15;
         } else if (output.length === 2 && output2.length === 2) {
           for (let i of bet.matkaBetNumber) {
@@ -387,7 +387,7 @@ router.post("/process-market-results", async (req, res) => {
               break;
             }
           }
-          winningAmount = bet.betAmount * 30;
+          winningAmount =  isWinner ? bet.betAmount * 30 : 0;
           srMultiplier = 30;
         } else if (output.length === 1 && output2.length === 2) {
           if (aankdo_close.includes(bet.matkaBetNumber)) {
@@ -395,7 +395,7 @@ router.post("/process-market-results", async (req, res) => {
           } else {
             isWinner = false;
           }
-          winningAmount = bet.betAmount * 30;
+          winningAmount =isWinner ? bet.betAmount * 30 : 0;
           srMultiplier = 30;
         } else if (output.length === 1 && output2.length === 1) {
           if (aankdo_close.includes(bet.matkaBetNumber)) {
@@ -403,7 +403,7 @@ router.post("/process-market-results", async (req, res) => {
           } else {
             isWinner = false;
           }
-          winningAmount = bet.betAmount * 90;
+          winningAmount = isWinner ? bet.betAmount * 90 : 0;
           srMultiplier = 90;
         }
       } else if (
@@ -427,7 +427,7 @@ router.post("/process-market-results", async (req, res) => {
             }
           }
         }
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = isWinner ? bet.betAmount * bet.matkaBetType.multiplier : 0;
       } else if (
         bet.matkaBetType.category === "DP Motor" &&
         bet.betTime === "Open"
@@ -444,7 +444,7 @@ router.post("/process-market-results", async (req, res) => {
             }
           }
         }
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = isWinner ? bet.betAmount * bet.matkaBetType.multiplier : 0;
       } else if (
         bet.matkaBetType.category === "SP Motor" &&
         bet.betTime === "Close" &&
@@ -462,7 +462,7 @@ router.post("/process-market-results", async (req, res) => {
             }
           }
         }
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = isWinner ? bet.betAmount * bet.matkaBetType.multiplier : 0;
       } else if (
         bet.matkaBetType.category === "DP Motor" &&
         bet.betTime === "Close" &&
@@ -479,7 +479,7 @@ router.post("/process-market-results", async (req, res) => {
             }
           }
         }
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = isWinner ? bet.betAmount * bet.matkaBetType.multiplier : 0;
       } else if (
         (bet.matkaBetType.category === "SP Motor" ||
           bet.matkaBetType.category === "DP Motor") &&
@@ -487,7 +487,7 @@ router.post("/process-market-results", async (req, res) => {
         aankdo_close === "XXX" // Only process if close number is set
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       } else if (
         bet.matkaBetType.category === "Double Pana" &&
         ((bet.betTime === "Open" &&
@@ -504,7 +504,7 @@ router.post("/process-market-results", async (req, res) => {
         aankdo_close === "XXX" // Only process if close number is set
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       } else if (
         bet.matkaBetType.category === "Triple Pana" &&
         ((bet.betTime === "Open" &&
@@ -521,7 +521,7 @@ router.post("/process-market-results", async (req, res) => {
         aankdo_close === "XXX" // Only process if close number is set
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       } else if (
         bet.matkaBetType.category === "Full Sangam" &&
         bet.matkaBetNumber.slice(0, 3) === aankdo_open &&
@@ -535,7 +535,7 @@ router.post("/process-market-results", async (req, res) => {
         bet.matkaBetNumber.slice(0, 3) === aankdo_close
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       } else if (
         bet.matkaBetType.category === "Half Sangam" &&
         ((bet.betTime === "Open" &&
@@ -559,7 +559,7 @@ router.post("/process-market-results", async (req, res) => {
             bet.matkaBetNumber.slice(0, 3) === aankdo_open))
       ) {
         isWinner = "Pending";
-        winningAmount = bet.betAmount * bet.matkaBetType.multiplier;
+        winningAmount = 0;
       }
 
       // Update bet status
