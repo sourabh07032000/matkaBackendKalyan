@@ -4,6 +4,8 @@ const Bet = require("../models/Bet");
 const Market = require("../models/Market");
 const User = require("../models/User"); // Import User model
 const router = express.Router();
+const moment = require("moment"); // Ensure you install moment.js
+
 
 // ✅ 1. Place a Bet (Create and link to user)
 router.post("/place-bet", async (req, res) => {
@@ -14,14 +16,15 @@ router.post("/place-bet", async (req, res) => {
         const market = await Market.findOne({ market_name : market_id });  // Use market_id as name
         if (!market) return res.status(404).json({ message: "Market not found" });
 
-        // Get the bet close time from the market
-        const betClosingTime = new Date(market.close_time_formatted);
+       // Convert bet closing time (e.g., "11:58 PM") to a Date object with today's date
+        const betClosingTime = moment(market.betCloseTime, "hh:mm A").toDate();
         const currentTime = new Date();
 
         // Check if the bet close time has passed
         if (currentTime >= betClosingTime) {
             return res.status(400).json({ message: "Bet placement closed for this market." });
         }
+
 
 
         // Check if the user exists
