@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Bet = require("../models/Bet");
+const Market = require("../models/Market");
 const User = require("../models/User"); // Import User model
 const router = express.Router();
 
@@ -8,6 +9,20 @@ const router = express.Router();
 router.post("/place-bet", async (req, res) => {
     try {
         const { user_id, betNo, market_id, betTime, matkaBetType, matkaBetNumber, betAmount } = req.body;
+
+        // Fetch market details using market_name
+        const market = await Market.findOne({ market_name : market_id });  // Use market_id as name
+        if (!market) return res.status(404).json({ message: "Market not found" });
+
+        // Get the bet close time from the market
+        const betClosingTime = new Date(market.close_time_formatted);
+        const currentTime = new Date();
+
+        // Check if the bet close time has passed
+        if (currentTime >= betClosingTime) {
+            return res.status(400).json({ message: "Bet placement closed for this market." });
+        }
+
 
         // Check if the user exists
         const user = await User.findById(user_id);
