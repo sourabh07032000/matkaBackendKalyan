@@ -19,7 +19,7 @@ router.post("/place-bet", async (req, res) => {
        // Convert bet closing time (e.g., "11:58 PM") to a Date object with today's date
         const betClosingTime = moment(market.close_time_formatted, "hh:mm A").toDate();
         const currentTime = new Date();
-
+        console.log(currentTime >= betClosingTime, betClosingTime, currentTime)
         // Check if the bet close time has passed
         if (currentTime >= betClosingTime) {
             return res.status(400).json({ message: "Bet placement closed for this market." });
