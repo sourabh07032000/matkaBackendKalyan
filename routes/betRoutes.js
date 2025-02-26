@@ -22,7 +22,7 @@ router.post("/place-bet", async (req, res) => {
 
         console.log(currentTime >= betClosingTime, betClosingTime, currentTime)
         // Check if the bet close time has passed
-        if (currentTime <= betClosingTime) {
+        if (currentTime >= betClosingTime) {
             return res.status(400).json({ message: "Bet placement closed for this market." });
         }
 
