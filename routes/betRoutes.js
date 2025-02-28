@@ -17,12 +17,17 @@ router.post("/place-bet", async (req, res) => {
         if (!market) return res.status(404).json({ message: "Market not found" });
 
         const betClosingTime = moment.tz(market.close_time_formatted, "hh:mm A", "Asia/Kolkata").toDate();
+        const betOpeningTime = moment.tz(market.open_time_formatted, "hh:mm A", "Asia/Kolkata").toDate();
         const currentTime = moment().tz("Asia/Kolkata").toDate();
         
 
         console.log(currentTime >= betClosingTime, betClosingTime, currentTime)
         // Check if the bet close time has passed
         if (currentTime >= betClosingTime) {
+            return res.status(400).json({ message: "Bet placement closed for this market." });
+        }
+
+        if (currentTime < betOpeningTime && market.aankdo_open == "") {
             return res.status(400).json({ message: "Bet placement closed for this market." });
         }
 
