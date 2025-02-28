@@ -27,7 +27,7 @@ router.post("/place-bet", async (req, res) => {
             return res.status(400).json({ message: "Bet placement closed for this market." });
         }
 
-        if (currentTime < betOpeningTime && market.aankdo_open == "") {
+        if (currentTime >= betOpeningTime && market.aankdo_open == "") {
             return res.status(400).json({ message: "Bet placement closed for this market." });
         }
 
