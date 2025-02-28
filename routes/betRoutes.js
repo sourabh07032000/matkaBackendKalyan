@@ -21,7 +21,7 @@ router.post("/place-bet", async (req, res) => {
         const currentTime = moment().tz("Asia/Kolkata").toDate();
         
 
-        console.log(currentTime >= betClosingTime, betClosingTime, currentTime)
+        console.log("Condition: ", currentTime >= betOpeningTime && market.aankdo_open == "", betOpeningTime,  market.aankdo_open)
         // Check if the bet close time has passed
         if (currentTime >= betClosingTime) {
             return res.status(400).json({ message: "Bet placement closed for this market." });
