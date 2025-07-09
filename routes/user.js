@@ -4,7 +4,7 @@ const User = require('../models/User');
 const mongoose = require('mongoose');
 const SlabRate = require("../models/SlabRate");
 
-router.post('/', async(req, res)=>{
+router.post('/login', async(req, res)=>{
   try {
     const { mobileNumber, password } = req.body;
 
