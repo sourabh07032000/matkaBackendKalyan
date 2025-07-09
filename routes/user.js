@@ -35,7 +35,7 @@ router.post('/', async(req, res)=>{
   }
 
   
-)}
+})
 // POST: User route (Create)
 router.post('/', async (req, res) => {
   const { username, mobileNumber, password, mPin } = req.body;
