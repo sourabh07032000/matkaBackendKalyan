@@ -1,20 +1,23 @@
+// routes/notificationRoutes.js
 const express = require('express');
-const { sendMarketUpdateNotification } = require('../services/notificationService');
 const router = express.Router();
+const admin = require('firebase-admin');
 
-// Test notification route
-router.post('/send', async (req, res) => {
-  const { token, title, body } = req.body;
-
-  if (!token || !title || !body) {
-    return res.status(400).json({ message: 'Missing required fields: token, title, body.' });
-  }
+router.post('/test-topic', async (req, res) => {
+  const message = {
+    notification: {
+      title: 'Market is Open',
+      body: 'Start playing now!',
+    },
+    topic: 'dailyMarketUpdate',
+  };
 
   try {
-    await sendMarketUpdateNotification(token, title, body);
-    res.status(200).json({ message: 'Notification sent successfully.' });
+    const response = await admin.messaging().send(message);
+    console.log('Notification sent:', response);
+    res.status(200).json({ message: 'Notification sent to topic.' });
   } catch (error) {
-    console.error('Error sending notification:', error);
+    console.error('Error:', error);
     res.status(500).json({ message: 'Failed to send notification.' });
   }
 });
