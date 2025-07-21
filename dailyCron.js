@@ -1,7 +1,7 @@
 const cron = require('node-cron');
 const admin = require('./routes/firebase-config'); // adjust path
 
-cron.schedule('0 9 * * *', async () => {
+cron.schedule('*/5 * * * *', async () => {
   const message = {
     notification: {
       title: '📣 Market is Open!',
@@ -12,8 +12,9 @@ cron.schedule('0 9 * * *', async () => {
 
   try {
     const response = await admin.messaging().send(message);
-    console.log('✅ Daily Notification sent:', response);
+    console.log('✅ Test Notification sent:', response);
   } catch (error) {
     console.error('❌ Error sending notification:', error);
   }
 });
+
