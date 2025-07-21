@@ -87,3 +87,4 @@ const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
+require('./dailyCron');
